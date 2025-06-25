@@ -68,7 +68,7 @@ const ErrorMessage = styled.div`
 `;
 
 
-export default function ErrorFallback({ error, resetErrorBoundary }) {
+function ErrorFallback({ error, resetErrorBoundary }) {
   return (
     <StyledErrorFallback>
       <Box>
@@ -83,3 +83,5 @@ export default function ErrorFallback({ error, resetErrorBoundary }) {
     </StyledErrorFallback>
   );
 }
+
+export default ErrorFallback;

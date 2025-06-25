@@ -13,7 +13,7 @@ import { useMoveBack } from "../../hooks/useMoveBack";
 import { useParams } from "react-router-dom";
 import useGetBooking from "../bookings/useGetBooking";
 import Spinner from "../../ui/Spinner";
-import ErrorFallBack from "../../ui/ErrorFallBack";
+import ErrorFallback from "../../ui/ErrorFallback";
 import { HiArrowDownOnSquare, HiArrowUpOnSquareStack } from "react-icons/hi2";
 import useCheckout from "./useCheckout";
 import SpinnerMini from "../../ui/SpinnerMini";
@@ -54,7 +54,7 @@ function BookingDetail() {
 
   if (isFetchingBookig) return <Spinner />;
   if (!booking) return <Empty resource="booking" />;
-  if (error) return <ErrorFallBack error={error} />;
+  if (error) return <ErrorFallback error={error} />;
   return (
     <>
       <Modal>

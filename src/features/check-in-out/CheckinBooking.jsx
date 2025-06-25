@@ -11,7 +11,7 @@ import { useMoveBack } from "../../hooks/useMoveBack";
 import { useParams } from "react-router-dom";
 import useGetBooking from "../bookings/useGetBooking";
 import Spinner from "../../ui/Spinner";
-import CheckBox from "../../ui/CheckBox";
+import Checkbox from "../../ui/Checkbox";
 import { useEffect, useState } from "react";
 import { formatCurrency } from "../../utils/helpers";
 import useCheckin from "../bookings/useCheckin";
@@ -81,16 +81,16 @@ function CheckinBooking() {
       <BookingDataBox booking={booking} />
 
       {!hasBreakfast && <Box>
-        <CheckBox
+        <Checkbox
           id="breakfast"
           checked={addBreakfast}
           onChange={(e) => setAddBreakfast(e.target.checked)}
         >
           Want to add breakfast for {formatCurrency(optionalBreakfastPrice)}
-        </CheckBox>
+        </Checkbox>
       </Box>}
       <Box>
-        <CheckBox
+        <Checkbox
           id="confirm"
           checked={isConfirmed || isCheckingIn}
           onChange={(e) => setIsConfirmed(e.target.checked)}
@@ -101,7 +101,7 @@ function CheckinBooking() {
           {(addBreakfast && (
             <> &nbsp;({formatCurrency(totalPrice)} + {formatCurrency(optionalBreakfastPrice)})</>
           ))}
-        </CheckBox>
+        </Checkbox>
       </Box>
       <ButtonGroup>
         <Button

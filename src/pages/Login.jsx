@@ -9,12 +9,11 @@ const LoginLayout = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  background-image: url("/bg.png");
-  background-size: cover;
+  background-color: var(--color-grey-100);
+  /* background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
   padding: 2rem;
 
   .login-box {
@@ -34,6 +33,12 @@ const LoginLayout = styled.main`
       color: var(--color-grey-800);
       text-align: center;
     }
+    h3 {
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--color-grey-800);
+      text-align: center;
+    }
   }
 `;
 
@@ -43,6 +48,7 @@ function Login() {
       <div className="login-box">
         <Logo />
         <Heading>Login to your account</Heading>
+        <Heading style={{ color: "var(--color-red-700)" }} as="h3">Only Admins and Employees are allowed</Heading>
         <LoginForm />
       </div>
     </LoginLayout>

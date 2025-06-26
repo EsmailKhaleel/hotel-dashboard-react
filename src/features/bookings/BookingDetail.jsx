@@ -70,7 +70,7 @@ function BookingDetail() {
         <BookingDataBox booking={booking} />
 
         <ButtonGroup>
-          {status === "unconfirmed" || status === "pending" && <Button
+          {status === "unconfirmed" && <Button
             $variation="primary"
             onClick={() => {
               navigate(`/checkin/${id}`);

@@ -106,7 +106,7 @@ function BookingRow({
             >
               See details
             </Menus.Button>
-            {status === "unconfirmed" || status === "pending" && <Menus.Button
+            {status === "unconfirmed" && <Menus.Button
               icon={<HiArrowDownOnSquareStack style={{ color: "var(--color-green-700)" }} />}
               onClick={() => {
                 navigate(`/checkin/${bookingId}`);

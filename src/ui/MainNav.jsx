@@ -1,6 +1,7 @@
 import { HiOutlineCalendarDays, HiOutlineHome, HiOutlineHomeModern, HiOutlineUsers } from "react-icons/hi2";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { VscSettingsGear } from "react-icons/vsc";
 
 
 const NavList = styled.ul`
@@ -78,7 +79,7 @@ export default function MainNav() {
         </li>
         <li>
           <StyledLink to="/settings">
-            <HiOutlineUsers/>
+            <VscSettingsGear/>
             Settings
           </StyledLink>
         </li>

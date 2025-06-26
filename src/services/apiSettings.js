@@ -1,19 +1,17 @@
-import axios from "axios";
+import axiosInstance from "./axiosInstance";
 
-const BASE_URL = "http://localhost:3000/api/settings";
 
 export async function getSettings() {
-  const response = await axios.get(BASE_URL);
+  const response = await axiosInstance.get("/settings");
   return response.data.settings;
 }
 
 export async function updateSetting(newSetting) {
-  const response = await axios.patch(BASE_URL, newSetting);
+  const response = await axiosInstance.patch("/settings", newSetting);
   return response.data.settings;
 }
 
 export async function resetSettings() {
-  const response = await axios.post(BASE_URL + "/reset");
-  await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulate a delay
+  const response = await axiosInstance.post("/settings/reset");
   return response.data.settings;
 }

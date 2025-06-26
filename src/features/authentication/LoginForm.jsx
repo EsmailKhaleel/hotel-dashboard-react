@@ -5,24 +5,28 @@ import FormRowVertical from "../../ui/FormRowVertical";
 import useLogin from "./useLogin";
 import { useForm } from "react-hook-form";
 import SpinnerMini from "../../ui/SpinnerMini";
+import { HiOutlineLogin } from "react-icons/hi";
 
 function LoginForm() {
   const { mutate: login, isPending } = useLogin();
-  const { register, reset, handleSubmit, formState: { errors } } = useForm();
+  const { register, reset, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
+      email: "esmailkhaleel27@gmail.com",
+      password: "11111111"
+    }
+  });
 
   function handleLogin(values) {
+    console.log(values);
     login(values, {
       onSuccess: () => {
-        reset();
-      },
-      onError: () => {
         reset();
       }
     });
   }
 
   return (
-    <Form onSubmit={handleSubmit(handleLogin)}>
+    <Form onSubmit={handleSubmit(handleLogin)} noValidate>
       <FormRowVertical error={errors.email?.message}>
         <Input
           type="email"
@@ -54,7 +58,8 @@ function LoginForm() {
         />
       </FormRowVertical>
       <FormRowVertical>
-        <Button size="large" disabled={isPending} type="submit">
+        <Button $size="large" disabled={isPending} type="submit">
+          <HiOutlineLogin style={{ marginRight: "8px" }}/>
           {isPending ? <SpinnerMini /> : "Login"}
         </Button>
       </FormRowVertical>

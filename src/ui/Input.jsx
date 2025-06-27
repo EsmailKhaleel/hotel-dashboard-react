@@ -1,22 +1,32 @@
 import styled from "styled-components";
 
 const Input = styled.input`
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--color-grey-300);
-    border-radius: 5px;
-    font-size: 16px;
-    color: var(--color-grey-800);
-    background-color: var(--color-white);
-    
-    &:focus {
-        border-color: var(--color-brand-500);
-        outline: none;
-        box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.6);
-    }
+    font-size: 1.4rem;
+  padding: 1.2rem 1.6rem;
+  border: 1px solid var(--color-grey-300);
+  border-radius: var(--border-radius-sm, 4px);
+  background-color: var(--color-grey-0);
+  box-shadow: none;
+  transform: none;
+  
+  &:focus {
+    outline: none;
+    border-color: var(--color-brand-600);
+  }
 
-    &::placeholder {
-        color: var(--color-grey-900);
-    }
+  &[aria-invalid="true"] {
+    border-color: var(--color-red-700);
+  }
+
+  &:disabled {
+    background-color: var(--color-grey-300);
+    cursor: not-allowed;
+  }
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    
+  }
 `;
 export default Input;

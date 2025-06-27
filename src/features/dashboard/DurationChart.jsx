@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { useMemo } from "react";
 import Heading from "../../ui/Heading";
-import { 
-  Cell, 
-  Legend, 
-  Pie, 
-  PieChart, 
-  ResponsiveContainer, 
-  Tooltip 
+import {
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip
 } from "recharts";
 import useDarkMode from "../../context/useDarkMode";
 
@@ -27,22 +27,18 @@ const ChartBox = styled.div`
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(
-      90deg,
-      #ef4444,
-      #f97316,
-      #eab308,
-      #84cc16,
-      #22c55e,
-      #14b8a6,
-      #3b82f6,
-      #a855f7
-    );
+    background: linear-gradient(90deg, lightpink, orange, yellow, lightgreen, cyan, lightblue, violet);
     border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
   }
 
   & > *:first-child {
     margin-bottom: 1.6rem;
+  }
+
+  /* responsive */
+  @media (max-width: 600px) {
+    grid-column: 1 / -1;
+     padding: 1.6rem 1.6rem;
   }
 `;
 
@@ -50,7 +46,10 @@ const ChartHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
 `;
 
 const ChartStats = styled.div`
@@ -76,6 +75,7 @@ const StatItem = styled.div`
     text-transform: uppercase;
     letter-spacing: 0.3px;
   }
+  
 `;
 
 
@@ -130,7 +130,7 @@ function prepareData(startData, stays) {
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload;
-    
+
     return (
       <div style={{
         background: 'var(--color-grey-0)',
@@ -140,8 +140,8 @@ const CustomTooltip = ({ active, payload }) => {
         fontSize: '13px',
         boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
       }}>
-        <p style={{ 
-          margin: 0, 
+        <p style={{
+          margin: 0,
           fontWeight: '600',
           color: data.color,
           marginBottom: '2px'
@@ -165,7 +165,6 @@ const CustomLegend = ({ payload }) => {
       flexDirection: 'column',
       gap: '6px',
       fontSize: '12px',
-      paddingLeft: '12px'
     }}>
       {payload.map((entry, index) => (
         <div
@@ -186,8 +185,7 @@ const CustomLegend = ({ payload }) => {
             }}
           />
           <span style={{ fontSize: '11px' }}>{entry.value}</span>
-          <span style={{ 
-            marginLeft: 'auto', 
+          <span style={{
             fontWeight: '600',
             color: 'var(--color-grey-800)'
           }}>
@@ -201,21 +199,21 @@ const CustomLegend = ({ payload }) => {
 
 export default function DurationChart({ confirmedStays }) {
   const { isDarkMode } = useDarkMode();
-  
+  const isMobile = window.innerWidth <= 600;
   const startData = isDarkMode ? startDataDark : startDataLight;
   const data = prepareData(startData, confirmedStays);
-  
+
   // Calculate statistics
   const stats = useMemo(() => {
     const total = data.reduce((sum, item) => sum + item.value, 0);
     const avgStay = data.reduce((sum, item) => {
       const nights = item.duration === "1 night" ? 1 :
-                   item.duration === "2 nights" ? 2 :
-                   item.duration === "3 nights" ? 3 :
-                   item.duration === "4-5 nights" ? 4.5 :
-                   item.duration === "6-7 nights" ? 6.5 :
-                   item.duration === "8-14 nights" ? 11 :
-                   item.duration === "15-21 nights" ? 18 : 25;
+        item.duration === "2 nights" ? 2 :
+          item.duration === "3 nights" ? 3 :
+            item.duration === "4-5 nights" ? 4.5 :
+              item.duration === "6-7 nights" ? 6.5 :
+                item.duration === "8-14 nights" ? 11 :
+                  item.duration === "15-21 nights" ? 18 : 25;
       return sum + (nights * item.value);
     }, 0) / total;
 
@@ -237,17 +235,17 @@ export default function DurationChart({ confirmedStays }) {
           </StatItem>
         </ChartStats>
       </ChartHeader>
-      
+
       <ResponsiveContainer width="100%" height={240}>
         <PieChart>
           <Pie
             data={data}
             nameKey="duration"
             dataKey="value"
-            cx="35%"
+            cx={isMobile ? "40%" : "35%"}
             cy="50%"
-            innerRadius={70}
-            outerRadius={100}
+            innerRadius={isMobile ? 40 : 70}
+            outerRadius={isMobile ? 70 : 100}
             paddingAngle={2}
           >
             {data.map((entry, index) => (
@@ -265,10 +263,6 @@ export default function DurationChart({ confirmedStays }) {
             verticalAlign="middle"
             align="right"
             layout="vertical"
-            wrapperStyle={{
-              paddingLeft: '16px',
-              fontSize: '12px'
-            }}
           />
         </PieChart>
       </ResponsiveContainer>

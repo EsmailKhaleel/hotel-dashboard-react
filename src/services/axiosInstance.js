@@ -8,6 +8,17 @@ const axiosInstance = axios.create({
     },
     withCredentials: true,
 });
+export const handleRequest = async (request, returnKey) => {
+    try {
+        const response = await request();
+        return returnKey ? response.data[returnKey] : response.data;
+    } catch (error) {
+        if (error.response?.data?.message) {
+            throw new Error(error.response.data.message);
+        }
+        throw error;
+    }
+};
 
 // 1️ Request Interceptor
 axiosInstance.interceptors.request.use(

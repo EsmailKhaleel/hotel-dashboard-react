@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Form from '../../ui/Form';
 import { FormRow } from '../../ui/FormRow';
 import Input from '../../ui/Input';
@@ -16,6 +17,23 @@ function UpdateSettingsForm() {
   const { mutate: updateSettings, isPending: isUpdatingSetting } = useUpdateSettings();
   const { mutate: resetSettings, isPending: isResetting } = useResetSettings();
 
+  const [formValues, setFormValues] = useState({
+    minBookingLength: '',
+    maxBookingLength: '',
+    maxGuestsPerBooking: '',
+    breakfastPrice: ''
+  });
+
+  useEffect(() => {
+    if (settings) {
+      setFormValues({
+        minBookingLength: minBookingLength ?? '',
+        maxBookingLength: maxBookingLength ?? '',
+        maxGuestsPerBooking: maxGuestsPerBooking ?? '',
+        breakfastPrice: breakfastPrice ?? ''
+      });
+    }
+  }, [settings, minBookingLength, maxBookingLength, maxGuestsPerBooking, breakfastPrice]);
 
   if (isLoadingSettings) {
     return <Spinner />;
@@ -27,15 +45,28 @@ function UpdateSettingsForm() {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
+    
+    setFormValues(prev => ({
+      ...prev,
+      [id]: value
+    }));
+    
+    if (String(settings[id]) === value) return;
     updateSettings({ [id]: value });
+  };
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormValues(prev => ({
+      ...prev,
+      [id]: value
+    }));
   };
 
   const handleResetSettings = (e) => {
     e.preventDefault();
     resetSettings();
-  }
-
-
+  };
 
   return (
     <Form>
@@ -43,7 +74,8 @@ function UpdateSettingsForm() {
         <Input
           type='number'
           id='minBookingLength'
-          defaultValue={minBookingLength || ""}
+          value={formValues.minBookingLength}
+          onChange={handleInputChange}
           onBlur={handleChange}
           disabled={isUpdatingSetting}
         />
@@ -53,7 +85,8 @@ function UpdateSettingsForm() {
         <Input
           type='number'
           id='maxBookingLength'
-          defaultValue={maxBookingLength || ""}
+          value={formValues.maxBookingLength}
+          onChange={handleInputChange}
           onBlur={handleChange}
           disabled={isUpdatingSetting}
         />
@@ -63,7 +96,8 @@ function UpdateSettingsForm() {
         <Input
           type='number'
           id='maxGuestsPerBooking'
-          defaultValue={maxGuestsPerBooking || ""}
+          value={formValues.maxGuestsPerBooking}
+          onChange={handleInputChange}
           onBlur={handleChange}
           disabled={isUpdatingSetting}
         />
@@ -73,26 +107,24 @@ function UpdateSettingsForm() {
         <Input
           type='number'
           id='breakfastPrice'
-          defaultValue={breakfastPrice || ""}
+          value={formValues.breakfastPrice}
+          onChange={handleInputChange}
           onBlur={handleChange}
           disabled={isUpdatingSetting}
         />
       </FormRow>
 
       <FormRow>
-          <Button
-            $variant="secondary"
-            $size="medium"
-            onClick={handleResetSettings}
-            disabled={isResetting || isUpdatingSetting}
-
-          >
-            {isResetting ? <SpinnerMini />: "Reset"}
-          </Button>
+        <Button
+          $variant="secondary"
+          $size="medium"
+          onClick={handleResetSettings}
+          disabled={isResetting || isUpdatingSetting}
+        >
+          {isResetting ? <SpinnerMini /> : "Reset"}
+        </Button>
       </FormRow>
-
     </Form>
-
   );
 }
 

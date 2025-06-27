@@ -7,16 +7,28 @@ const sizes = {
     text-transform: uppercase;
     font-weight: 600;
     text-align: center;
+
+    @media (max-width: 600px) {
+      padding: 0.3rem 0.6rem;
+    }
   `,
   medium: css`
     font-size: 1.4rem;
     padding: 1.2rem 1.6rem;
     font-weight: 500;
+
+    @media (max-width: 600px) {
+      padding: 0.8rem 1.2rem;
+    }
   `,
   large: css`
     font-size: 1.6rem;
     padding: 1.2rem 2.4rem;
     font-weight: 500;
+
+    @media (max-width: 600px) {
+      padding: 1rem 1.6rem;
+    }
   `,
 };
 
@@ -65,5 +77,6 @@ const Button = styled.button`
   align-items: center;
   gap: 0.4rem;
 `;
+
 
 export default Button;

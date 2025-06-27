@@ -1,55 +1,50 @@
-import axiosInstance from "./axiosInstance";
-
+import axiosInstance, { handleRequest } from "./axiosInstance";
 
 export const getBookings = async ({ filter, sortQuery, page }) => {
-    const response = await axiosInstance.get('/bookings', { 
-      params: { 
+  return handleRequest(() =>
+    axiosInstance.get("/bookings", {
+      params: {
         status: filter.value,
         sortBy: sortQuery.field,
         sortOrder: sortQuery.direction,
-        page
-       } 
-    });
-    return response.data;
+        page,
+      },
+    })
+  );
 };
 
 export const getBooking = async (id) => {
-    const response = await axiosInstance.get(`/bookings/${id}`);
-    return response.data.booking;
+  return handleRequest(() => axiosInstance.get(`/bookings/${id}`), "booking");
+};
+
+export const createBooking = async (data) => {
+  return handleRequest(() => axiosInstance.post("/bookings", data), "booking");
 };
 
 export const updateBooking = async (id, data) => {
-    const response = await axiosInstance.patch(`/bookings/${id}`, data);
-    return response.data.booking;
+  return handleRequest(() => axiosInstance.patch(`/bookings/${id}`, data), "booking");
 };
 
 export const deleteBooking = async (id) => {
-    const response = await axiosInstance.delete(`/bookings/${id}`);
-    return response.data;
+  return handleRequest(() => axiosInstance.delete(`/bookings/${id}`));
 };
 
-// Get bookings after a specific date
-// expects ?date=ISODate
-
 export const getBookingsAfterDate = async (date) => {
-    const response = await axiosInstance.get('/bookings/after-date', {
-        params: { date }
-    });
-    return response.data;
-}
-
-// Get stays after a specific date
-// expects ?date=ISODate
+  return handleRequest(() =>
+    axiosInstance.get("/bookings/after-date", {
+      params: { date },
+    })
+  );
+};
 
 export const getStaysAfterDate = async (date) => {
-    const response = await axiosInstance.get('/bookings/stays-after-date', {
-        params: { date }
-    });
-    return response.data;
-}
+  return handleRequest(() =>
+    axiosInstance.get("/bookings/stays-after-date", {
+      params: { date },
+    })
+  );
+};
 
-// Get stays that theitr activity is today
 export const getStaysTodayActivity = async () => {
-    const response = await axiosInstance.get('/bookings/stays-today-activity');
-    return response.data;
-}
+  return handleRequest(() => axiosInstance.get("/bookings/stays-today-activity"));
+};

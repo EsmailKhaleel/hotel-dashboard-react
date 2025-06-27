@@ -1,6 +1,7 @@
 import { HiArrowLeftCircle, HiArrowRightCircle } from "react-icons/hi2";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
+import { scrollMainToTop } from "../utils/helpers";
 
 const StyledPagination = styled.div`
   width: 100%;
@@ -91,12 +92,14 @@ export default function Pagination({ count }) {
     const nextPage = currentPage === totalPages ? currentPage : currentPage + 1;
     searchParams.set("page", nextPage);
     setSearchParams(searchParams);
+    scrollMainToTop();
   }
 
   function prevPage() {
     const prevPage = currentPage === 1 ? currentPage : currentPage - 1;
     searchParams.set("page", prevPage);
     setSearchParams(searchParams);
+    scrollMainToTop();
   }
 
   return (

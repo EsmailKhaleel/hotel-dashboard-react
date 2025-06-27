@@ -11,9 +11,14 @@ import TodayActivity from "../check-in-out/TodayActivity.jsx";
 
 const StyledDashboardLayout = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto 34rem auto;
   gap: 2.4rem;
+  @media screen and (max-width:600px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5, auto);
+    gap: 1rem;
+  }
 `;
 
 
@@ -32,12 +37,12 @@ export default function DashboardLayout() {
   }
   return (
     <StyledDashboardLayout>
-      <Stats
-        bookings={bookings}
-        confirmedStays={confirmedStays}
-        numDays={numDays}
-        cabinCount={cabins.length}
-      />
+        <Stats
+          bookings={bookings}
+          confirmedStays={confirmedStays}
+          numDays={numDays}
+          cabinCount={cabins.length}
+        />
       <DurationChart confirmedStays={confirmedStays} />
       <TodayActivity />
       <SalesChart bookings={bookings} numDays={numDays}/>

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Logo from "./Logo";
 import MainNav from "./MainNav";
+import { HiOutlineMenu } from "react-icons/hi";
 
 const StyledSidebar = styled.aside`
   background-color: var(--color-grey-0);
@@ -11,8 +12,14 @@ const StyledSidebar = styled.aside`
   display: flex;
   flex-direction: column;
   gap: 3.2rem;
+  @media (max-width: 768px) {
+    padding: 2rem 0rem;
+    width: 100%;
+    align-items: center;
+  }
 
 `;
+
 export default function Sidebar() {
   return (
     <StyledSidebar>

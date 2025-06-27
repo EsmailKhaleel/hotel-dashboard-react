@@ -19,6 +19,9 @@ const StyledToday = styled.div`
   
   grid-column: 3 / span 2;
   padding-top: 2.4rem;
+    @media (max-width: 600px) {
+    grid-column: 1 / -1;
+  }
 `;
 
 const TodayList = styled.ul`
@@ -43,12 +46,6 @@ const NoActivity = styled.p`
 function TodayActivity() {
   const { data: { activities } = {}, isPending, error } = useTodayActivity();
   // const { data: { bookings } = {}, isPending, error } = useBookings();
-  if (isPending) {
-    return <Spinner />;
-  }
-  console.log(activities);
-
-
 
   return (
     <StyledToday>

@@ -12,8 +12,8 @@ export default function SortBy({ options }) {
     }
 
   return (
-    <div>
+    <>
         <Select options={options} onChange={handleChange} value={currentValue}/>
-    </div>
+    </>
   )
 }

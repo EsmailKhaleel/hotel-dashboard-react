@@ -52,6 +52,9 @@ const Heading = styled.h1.attrs(props => ({
   color: var(--color-grey-800);
   margin: 0;
   padding: 0;
+    @media screen and (max-width: 600px) {
+      font-size: 1.6rem;
+    }
 `;
 
 export default Heading;

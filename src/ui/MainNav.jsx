@@ -1,16 +1,20 @@
 import { HiOutlineCalendarDays, HiOutlineHome, HiOutlineHomeModern, HiOutlineUsers } from "react-icons/hi2";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { VscSettingsGear } from "react-icons/vsc";
+import { TbPencilPlus } from "react-icons/tb";
+import { IoSettingsOutline } from "react-icons/io5";
 
 
 const NavList = styled.ul`
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
   gap: 0.8rem;
+    
 `;
 
 const StyledLink = styled(NavLink)`
+
   &:link,
   &:visited {
     display: flex;
@@ -22,6 +26,7 @@ const StyledLink = styled(NavLink)`
     font-weight: 500;
     padding: 1.2rem 2.4rem;
     transition: all 0.3s;
+
   }
 
   /* This works because react-router places the active class on the active NavLink */
@@ -47,6 +52,20 @@ const StyledLink = styled(NavLink)`
   &.active:visited svg {
     color: var(--color-brand-600);
   }
+
+  @media (max-width: 600px) {
+      & span {
+      display: none;
+    }
+    & svg {
+      width: 2rem;
+      height: 2rem;
+    }
+    &:link,
+    &:visited {
+      padding: 1.2rem 1.6rem;
+    }
+  }
 `;
 
 export default function MainNav() {
@@ -62,27 +81,34 @@ export default function MainNav() {
         <li>
           <StyledLink to="/bookings">
           <HiOutlineCalendarDays />
-            Bookings
+             <span>Bookings</span>
           </StyledLink>
         </li>
         <li>
           <StyledLink to="/cabins">
             <HiOutlineHomeModern />
-            Cabins
+             <span>Cabins</span>
           </StyledLink>
         </li>
         <li>
           <StyledLink to="/users">
             <HiOutlineUsers/>
-            Users
+             <span>Users</span>
           </StyledLink>
         </li>
         <li>
           <StyledLink to="/settings">
-            <VscSettingsGear/>
-            Settings
+            <IoSettingsOutline/>
+             <span>Settings</span>
           </StyledLink>
         </li>
+        <li>
+          <StyledLink to="/createBooking">
+            <TbPencilPlus/>
+             <span>New Booking</span>
+          </StyledLink>
+        </li>
+
         
       </NavList>
     </nav>

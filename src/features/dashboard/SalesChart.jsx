@@ -15,6 +15,9 @@ const StyledSalesChart = styled(DashboardBox)`
   & .recharts-cartesian-grid-vertical line {
     stroke: var(--color-grey-300);
   }    
+  @media (max-width: 600px) {
+    padding: 12px;
+  }
   `;
 const ChartHeader = styled.div`
   display: flex;
@@ -22,12 +25,29 @@ const ChartHeader = styled.div`
   align-items: center;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--color-grey-200);
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
 `;
+const ChartTitle = styled(Heading)`
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
 
+  @media (max-width: 600px) {
+    font-size: 18px;
+  }
+`;
 const DateLabel = styled.span`
   font-size: 14px;
   font-weight: 600;
   color: var(--color-grey-500);
+
+  @media (max-width: 600px) {
+    font-size: 12px;
+  }
 `;
 
 
@@ -35,8 +55,13 @@ const MetricsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px 20px;
-  margin-bottom: 24px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
 `;
+
 
 const MetricCard = styled.div`
   display: flex;
@@ -47,12 +72,16 @@ const MetricCard = styled.div`
   background: var( --color-grey-0);
   border: 1px solid var(--color-grey-200);
   backdrop-filter: blur(10px);
+    @media (max-width: 600px) {
+    padding: 8px;
+    gap: 12px;
+  }
 `;
 
 const MetricContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  
 `;
 
 const ModernIcon = styled.div`
@@ -71,6 +100,15 @@ const ModernIcon = styled.div`
     height: 24px;
     color: ${props => props.color};
   }
+
+  @media (max-width: 600px) {
+    width: 40px;
+    height: 40px;
+    & svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
 `;
 
 const MetricValue = styled.div`
@@ -78,6 +116,10 @@ const MetricValue = styled.div`
   font-weight: 700;
   color: ${props => props.color};
   margin-bottom: 4px;
+    @media (max-width: 600px) {
+    font-size: 20px;
+    margin-bottom: 0;
+  }
 `;
 
 const MetricLabel = styled.div`
@@ -86,10 +128,13 @@ const MetricLabel = styled.div`
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+    @media (max-width: 600px) {
+    font-size: 12px;
+  }
 `;
 export default function SalesChart({ bookings, numDays }) {
   const { isDarkMode } = useDarkMode();
-
+  const isMobile = window.innerWidth <= 600;
   const colors = isDarkMode
     ? {
       totalSales: { stroke: "#4f46e5", fill: "#4f46e5" },
@@ -139,9 +184,7 @@ export default function SalesChart({ bookings, numDays }) {
     <StyledSalesChart>
 
       <ChartHeader>
-        <Heading as="h2" style={{ margin: 0, fontSize: '24px', fontWeight: '700' }}>
-          Sales Overview
-        </Heading>
+        <ChartTitle as="h2">Sales Overview</ChartTitle>
         <DateLabel>
           {format(allDates[0], "MMM dd")} - {format(allDates[allDates.length - 1], "MMM dd, yyyy")}
         </DateLabel>
@@ -172,15 +215,26 @@ export default function SalesChart({ bookings, numDays }) {
         </MetricCard>
       </MetricsGrid>
 
-      <ResponsiveContainer height={300} minWidth={600}>
+      <ResponsiveContainer 
+      width="100%" 
+      height={isMobile ? 250 : 400}
+      >
         <AreaChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="label"
-            tick={{ fill: colors.text }}
+          <XAxis
+            dataKey="label"
+            tick={{
+              fill: colors.text,
+              fontSize: isMobile ? 10 : 12,
+            }}
             tickLine={{ stroke: colors.text }}
           />
-          <YAxis unit="$"
-            tick={{ fill: colors.text }}
+          <YAxis
+            unit="$"
+            tick={{
+              fill: colors.text,
+              fontSize: isMobile ? 10 : 12,
+            }}
             tickLine={{ stroke: colors.text }}
           />
           <Tooltip
@@ -210,36 +264,3 @@ export default function SalesChart({ bookings, numDays }) {
     </StyledSalesChart>
   )
 }
-
-// const fakeData = [
-//   { label: "Jan 09", totalSales: 480, extrasSales: 20 },
-//   { label: "Jan 10", totalSales: 580, extrasSales: 100 },
-//   { label: "Jan 11", totalSales: 550, extrasSales: 150 },
-//   { label: "Jan 12", totalSales: 600, extrasSales: 50 },
-//   { label: "Jan 13", totalSales: 700, extrasSales: 150 },
-//   { label: "Jan 14", totalSales: 800, extrasSales: 150 },
-//   { label: "Jan 15", totalSales: 700, extrasSales: 200 },
-//   { label: "Jan 16", totalSales: 650, extrasSales: 200 },
-//   { label: "Jan 17", totalSales: 600, extrasSales: 300 },
-//   { label: "Jan 18", totalSales: 550, extrasSales: 100 },
-//   { label: "Jan 19", totalSales: 700, extrasSales: 100 },
-//   { label: "Jan 20", totalSales: 800, extrasSales: 200 },
-//   { label: "Jan 21", totalSales: 700, extrasSales: 100 },
-//   { label: "Jan 22", totalSales: 810, extrasSales: 50 },
-//   { label: "Jan 23", totalSales: 950, extrasSales: 250 },
-//   { label: "Jan 24", totalSales: 970, extrasSales: 100 },
-//   { label: "Jan 25", totalSales: 900, extrasSales: 200 },
-//   { label: "Jan 26", totalSales: 950, extrasSales: 300 },
-//   { label: "Jan 27", totalSales: 850, extrasSales: 200 },
-//   { label: "Jan 28", totalSales: 900, extrasSales: 100 },
-//   { label: "Jan 29", totalSales: 800, extrasSales: 300 },
-//   { label: "Jan 30", totalSales: 950, extrasSales: 200 },
-//   { label: "Jan 31", totalSales: 1100, extrasSales: 300 },
-//   { label: "Feb 01", totalSales: 1200, extrasSales: 400 },
-//   { label: "Feb 02", totalSales: 1250, extrasSales: 300 },
-//   { label: "Feb 03", totalSales: 1400, extrasSales: 450 },
-//   { label: "Feb 04", totalSales: 1500, extrasSales: 500 },
-//   { label: "Feb 05", totalSales: 1400, extrasSales: 600 },
-//   { label: "Feb 06", totalSales: 1450, extrasSales: 400 },
-// ];
-

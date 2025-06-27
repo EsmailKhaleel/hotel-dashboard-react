@@ -26,3 +26,9 @@ export const formatCurrency = (value) =>
   new Intl.NumberFormat('en', { style: 'currency', currency: 'USD' }).format(
     value
   );
+
+
+  export function scrollMainToTop() {
+  const main = document.getElementById("main-wrapper");
+  if (main) main.scrollTo({ top: 0, behavior: "instant" });
+}

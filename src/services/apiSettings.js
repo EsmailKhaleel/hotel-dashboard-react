@@ -1,17 +1,16 @@
-import axiosInstance from "./axiosInstance";
+import axiosInstance, { handleRequest } from "./axiosInstance";
 
-
+// Get all settings
 export async function getSettings() {
-  const response = await axiosInstance.get("/settings");
-  return response.data.settings;
+  return handleRequest(() => axiosInstance.get("/settings"), "settings");
 }
 
+// Update settings
 export async function updateSetting(newSetting) {
-  const response = await axiosInstance.patch("/settings", newSetting);
-  return response.data.settings;
+  return handleRequest(() => axiosInstance.patch("/settings", newSetting), "settings");
 }
 
+// Reset settings to default
 export async function resetSettings() {
-  const response = await axiosInstance.post("/settings/reset");
-  return response.data.settings;
+  return handleRequest(() => axiosInstance.post("/settings/reset"), "settings");
 }

@@ -5,4 +5,8 @@ export const Flag = styled.img`
   border-radius: var(--border-radius-tiny);
   display: block;
   border: 1px solid var(--color-grey-200);
+
+  @media (max-width: 600px) {
+    max-width: 3rem;
+  }
 `;

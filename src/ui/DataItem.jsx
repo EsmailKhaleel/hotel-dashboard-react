@@ -5,6 +5,10 @@ const StyledDataItem = styled.div`
   align-items: center;
   gap: 1.6rem;
   padding: 0.8rem 0;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const Label = styled.span`
@@ -18,6 +22,7 @@ const Label = styled.span`
     height: 2rem;
     color: var(--color-brand-600);
   }
+  
 `;
 
 function DataItem({ icon, label, children }) {

@@ -1,13 +1,21 @@
 import styled from "styled-components";
 
 const Textarea = styled.textarea`
-  padding: 0.8rem 1.2rem;
+  font-size: 1.4rem;
+  padding: 1.2rem 1.6rem;
   border: 1px solid var(--color-grey-300);
-  border-radius: 5px;
+  border-radius: var(--border-radius-sm, 4px);
   background-color: var(--color-grey-0);
-  box-shadow: var(--shadow-sm);
-  width: 100%;
-  height: 8rem;
+  box-shadow: none;
+  transform: none;
+  resize: vertical;
+  min-height: 8rem;
+  max-height: 12rem;
+  
+  &:focus {
+    outline: none;
+    border-color: var(--color-brand-600);
+  }
 `;
 
 export default Textarea;

@@ -16,6 +16,7 @@ import Booking from './pages/Booking';
 import Checkin from './pages/Checkin';
 import ProtectedRoute from "./ui/ProtectedRoute";
 import DarkModeProvider from "./context/DarkModeProvider";
+import CreateBooking from "./pages/CreateBooking";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -43,6 +44,7 @@ export default function App() {
                             <Route path="account" element={<Account />} />
                             <Route path="settings" element={<Settings />} />
                             <Route path="bookings/:bookingId" element={<Booking />} />
+                            <Route path="createBooking" element={<CreateBooking />} />
                             <Route path="checkin/:bookingId" element={<Checkin />} />
                         </Route>
                         <Route path="login" element={<Login />} />

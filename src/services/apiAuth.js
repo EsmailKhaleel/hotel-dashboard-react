@@ -1,16 +1,4 @@
-import axiosInstance from "./axiosInstance";
-
-const handleRequest = async (request) => {
-    try {
-        const response = await request();
-        return response.data;
-    } catch (error) {
-        if (error.response?.data?.message) {
-            throw new Error(error.response.data.message);
-        }
-        throw error;
-    }
-};
+import axiosInstance, { handleRequest } from "./axiosInstance";
 
 export const login = async (credentials) =>
     handleRequest(() => axiosInstance.post("/auth/login", credentials));

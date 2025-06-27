@@ -26,6 +26,11 @@ const HeadingGroup = styled.div`
   display: flex;
   gap: 2.4rem;
   align-items: center;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 `;
 
 const Id = styled.div`

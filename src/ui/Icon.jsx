@@ -16,6 +16,13 @@ const Icon = styled.div`
     height: 3.2rem;
     color: var(--color-${(props) => props.color}-700);
   }
+
+  @media (max-width: 600px) {
+    & svg {
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+  }
 `;
 
 export default Icon;

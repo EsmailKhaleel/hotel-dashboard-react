@@ -3,11 +3,17 @@ import useDarkMode from "../context/useDarkMode";
 
 const StyledLogo = styled.div`
   text-align: center;
+  @media (max-width: 600px) {
+    img {
+      height: 4rem;
+    }
+  }
 `;
 
 const Img = styled.img`
   height: 9.6rem;
   width: auto;
+  object-fit: cover;
 `;
 
 function Logo() {

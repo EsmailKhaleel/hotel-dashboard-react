@@ -18,6 +18,17 @@ const Avatar = styled.img`
   object-position: center;
   border-radius: 50%;
   outline: 2px solid var(--color-grey-100);
+  @media screen and (max-width: 768px) {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+`;
+const UserName = styled.span`
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 `;
 
 export default function UserAvatar() {
@@ -27,7 +38,7 @@ export default function UserAvatar() {
   return (
     <StyledUserAvatar>
       <Avatar src={image || "default-user.jpg"} alt="User Avatar" />
-      <span>{name || "Guest"}</span>
+      <UserName>{name || "Guest"}</UserName>
     </StyledUserAvatar>
   );
 }

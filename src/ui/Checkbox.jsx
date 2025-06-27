@@ -23,6 +23,22 @@ const StyledCheckbox = styled.div`
     align-items: center;
     gap: 0.8rem;
   }
+
+  @media (max-width: 600px) {
+    gap: 0.8rem;
+    & label {
+      gap: 0.4rem;
+      font-size: 1.2rem;
+    }
+  }
+`;
+const CheckboxLabel = styled.label`
+  font-size: 1.4rem;
+  color: var(--color-grey-700);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 `;
 
 function Checkbox({ checked, onChange, disabled = false, id, children }) {
@@ -35,7 +51,7 @@ function Checkbox({ checked, onChange, disabled = false, id, children }) {
         onChange={onChange}
         disabled={disabled}
       />
-      <label htmlFor={!disabled ? id : ""}>{children}</label>
+      <CheckboxLabel htmlFor={!disabled ? id : ""}>{children}</CheckboxLabel>
     </StyledCheckbox>
   );
 }

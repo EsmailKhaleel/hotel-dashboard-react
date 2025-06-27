@@ -9,11 +9,16 @@ const StyledFilter = styled.div`
   padding: 0.4rem;
   display: flex;
   gap: 0.4rem;
+  @media screen  and (max-width: 600px) {
+    width: 100%;
+    padding: 0.2rem;
+  }
 `;
 
 const FilterButton = styled.button`
   background-color: var(--color-grey-0);
   border: none;
+  position: relative;
 
   ${(props) =>
     props.$active &&
@@ -32,6 +37,15 @@ const FilterButton = styled.button`
   &:hover:not(:disabled) {
     background-color: var(--color-brand-600);
     color: var(--color-brand-50);
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 1.2rem;
+    width: 100%;
+    letter-spacing: 1px;
+    text-wrap: nowrap;
+    padding: 0.4rem 0.2rem;
+
   }
 `;
 

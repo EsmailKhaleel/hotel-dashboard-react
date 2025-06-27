@@ -24,8 +24,17 @@ const Box = styled.div`
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
   padding: 1.4rem 2rem;
+  @media (max-width: 768px) {
+    padding: 1.2rem 1.6rem;
+  }
 `;
 
+const HeaderRow = styled(Row)`
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+    flex-direction: column;
+  }
+`;
 function CheckinBooking() {
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [addBreakfast, setAddBreakfast] = useState(false);
@@ -73,10 +82,10 @@ function CheckinBooking() {
   if (error) return <ErrorFallback error={error} />;
   return (
     <>
-      <Row type="horizontal">
+      <HeaderRow $type="horizontal">
         <Heading as="h1">Check in booking #{bookingId}</Heading>
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
-      </Row>
+      </HeaderRow>
 
       <BookingDataBox booking={booking} />
 

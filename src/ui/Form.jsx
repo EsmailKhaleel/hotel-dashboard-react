@@ -20,6 +20,10 @@ const Form = styled.form`
     
   overflow: hidden;
   font-size: 1.4rem;
+  width: 100%;
+  @media screen and (max-width: 600px) {
+    padding: 0rem;
+  }
 `;
 
 export default Form;

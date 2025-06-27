@@ -12,6 +12,9 @@ const StyledSelect = styled.select`
   background-color: var(--color-grey-0);
   font-weight: 500;
   box-shadow: var(--shadow-sm);
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 

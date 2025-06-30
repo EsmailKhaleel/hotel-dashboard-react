@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const Input = styled.input`
+appearance: none;
+-webkit-appearance: none;
     font-size: 1.4rem;
   padding: 1.2rem 1.6rem;
   border: 1px solid var(--color-grey-300);

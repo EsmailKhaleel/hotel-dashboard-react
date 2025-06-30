@@ -25,7 +25,6 @@ function LoginForm() {
   });
 
   function handleLogin(values) {
-    console.log(values);
     login(values, {
       onSuccess: () => {
         reset();

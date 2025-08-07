@@ -279,6 +279,7 @@ function BookingRow({
     unconfirmed: "yellow",
     "checked-in": "green",
     "checked-out": "silver",
+    confirmed: "blue",
   };
 
   return (

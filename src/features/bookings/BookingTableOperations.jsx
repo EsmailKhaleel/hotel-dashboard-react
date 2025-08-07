@@ -11,7 +11,8 @@ function BookingTableOperations() {
           { value: "all", label: "All" },
           { value: "checked-out", label: "Checked out" },
           { value: "checked-in", label: "Checked in" },
-          { value: "unconfirmed", label: "Unconfirmed" }
+          { value: "unconfirmed", label: "Unconfirmed" },
+          { value: "confirmed", label: "Confirmed" }
         ]}
       />
 

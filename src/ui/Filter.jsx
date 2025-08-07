@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import styled, { css } from "styled-components";
 
@@ -12,6 +13,7 @@ const StyledFilter = styled.div`
   @media screen  and (max-width: 600px) {
     width: 100%;
     padding: 0.2rem;
+    flex-wrap: wrap;
   }
 `;
 
@@ -50,12 +52,22 @@ const FilterButton = styled.button`
 `;
 
 
-const Filter = ({ filterField, options }) => {
+const Filter = ({ filterField, options, defaultValue }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  
+  useEffect(() => {
+    if (!searchParams.get(filterField) && defaultValue) {
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.set(filterField, defaultValue);
+      setSearchParams(newSearchParams);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleClick(filter) {
-    searchParams.set(filterField, filter);
-    setSearchParams(searchParams);
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set(filterField, filter);
+    setSearchParams(newSearchParams);
   }
 
   return (
@@ -71,7 +83,7 @@ const Filter = ({ filterField, options }) => {
         </FilterButton>
       ))}
     </StyledFilter>
-  )
-}
+  );
+};
 
 export default Filter

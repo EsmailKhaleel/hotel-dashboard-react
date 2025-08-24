@@ -342,6 +342,14 @@ function BookingRow({
                   Check in
                 </Menus.Button>
               )}
+              {status === "confirmed" && (
+                <Menus.Button
+                  icon={<HiArrowDownOnSquareStack style={{ color: "var(--color-green-700)" }} />}
+                  onClick={() => navigate(`/checkin/${bookingId}`)}
+                >
+                  Check in
+                </Menus.Button>
+              )}
               {status === "checked-in" && (
                 <Menus.Button
                   hasLoading={true}

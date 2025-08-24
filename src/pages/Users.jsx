@@ -10,7 +10,7 @@ const UsersHeader = styled(Heading)`
 
 function NewUsers() {
   return <>
-  <UsersHeader as="h1">Create a new user</UsersHeader>
+  <UsersHeader as="h1">Create a new employee account</UsersHeader>
   <SignupForm />
   </>;
 }

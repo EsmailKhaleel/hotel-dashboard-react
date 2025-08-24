@@ -158,6 +158,14 @@ export default function SalesChart({ bookings, numDays }) {
     return {
       label: format(date, "MMM dd"),
       totalSales: bookings.reduce((total, booking) => {
+        if (!booking.createdAt) return total;
+        const bookingDate = new Date(booking.createdAt);
+        if (isNaN(bookingDate)) return total;
+        if (isSameDay(bookingDate, date)) {
+          return total + (booking.totalPrice || 0);
+        }
+        return total;
+      }, 0) + bookings.reduce((total, booking) => {
         if (!booking.created_at) return total;
         const bookingDate = new Date(booking.created_at);
         if (isNaN(bookingDate)) return total;
@@ -167,6 +175,14 @@ export default function SalesChart({ bookings, numDays }) {
         return total;
       }, 0),
       extrasSales: bookings.reduce((total, booking) => {
+        if (!booking.createdAt) return total;
+        const bookingDate = new Date(booking.createdAt);
+        if (isNaN(bookingDate)) return total;
+        if (isSameDay(bookingDate, date)) {
+          return total + (booking.extrasPrice || 0);
+        }
+        return total;
+      }, 0) +  bookings.reduce((total, booking) => {
         if (!booking.created_at) return total;
         const bookingDate = new Date(booking.created_at);
         if (isNaN(bookingDate)) return total;
@@ -215,9 +231,9 @@ export default function SalesChart({ bookings, numDays }) {
         </MetricCard>
       </MetricsGrid>
 
-      <ResponsiveContainer 
-      width="100%" 
-      height={isMobile ? 250 : 400}
+      <ResponsiveContainer
+        width="100%"
+        height={isMobile ? 250 : 400}
       >
         <AreaChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />

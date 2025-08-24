@@ -107,21 +107,21 @@ function prepareData(startData, stays) {
       obj.duration === field ? { ...obj, value: obj.value + 1 } : obj
     );
   }
+  if (!stays || stays.length === 0) return startData;
 
-  const data = stays
-    .reduce((arr, cur) => {
-      const num = cur.numNights;
-      if (num === 1) return incArrayValue(arr, "1 night");
-      if (num === 2) return incArrayValue(arr, "2 nights");
-      if (num === 3) return incArrayValue(arr, "3 nights");
-      if ([4, 5].includes(num)) return incArrayValue(arr, "4-5 nights");
-      if ([6, 7].includes(num)) return incArrayValue(arr, "6-7 nights");
-      if (num >= 8 && num <= 14) return incArrayValue(arr, "8-14 nights");
-      if (num >= 15 && num <= 21) return incArrayValue(arr, "15-21 nights");
-      if (num >= 21) return incArrayValue(arr, "21+ nights");
-      return arr;
-    }, startData)
-    .filter((obj) => obj.value > 0);
+  const data = stays.reduce((arr, cur) => {
+    const num = cur.numNights;
+    if (num === 1) return incArrayValue(arr, "1 night");
+    if (num === 2) return incArrayValue(arr, "2 nights");
+    if (num === 3) return incArrayValue(arr, "3 nights");
+    if ([4, 5].includes(num)) return incArrayValue(arr, "4-5 nights");
+    if ([6, 7].includes(num)) return incArrayValue(arr, "6-7 nights");
+    if (num >= 8 && num <= 14) return incArrayValue(arr, "8-14 nights");
+    if (num >= 15 && num <= 21) return incArrayValue(arr, "15-21 nights");
+    if (num > 21) return incArrayValue(arr, "21+ nights");
+    return arr;
+  }, [...startData.map(obj => ({ ...obj }))]); // deep clone
+
 
   return data;
 }
@@ -199,13 +199,14 @@ const CustomLegend = ({ payload }) => {
 
 export default function DurationChart({ confirmedStays }) {
   const { isDarkMode } = useDarkMode();
-  const isMobile = window.innerWidth <= 600;
+  const isMobile = useMemo(() => window.matchMedia("(max-width: 600px)").matches, []);
   const startData = isDarkMode ? startDataDark : startDataLight;
   const data = prepareData(startData, confirmedStays);
 
   // Calculate statistics
   const stats = useMemo(() => {
     const total = data.reduce((sum, item) => sum + item.value, 0);
+    if (total === 0) return { total: 0, avgStay: "0.0" };
     const avgStay = data.reduce((sum, item) => {
       const nights = item.duration === "1 night" ? 1 :
         item.duration === "2 nights" ? 2 :
@@ -219,6 +220,7 @@ export default function DurationChart({ confirmedStays }) {
 
     return { total, avgStay: avgStay.toFixed(1) };
   }, [data]);
+
 
   return (
     <ChartBox>

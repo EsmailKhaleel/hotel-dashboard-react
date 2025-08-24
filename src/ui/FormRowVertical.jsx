@@ -2,10 +2,6 @@ import styled from "styled-components";
 
 const StyledFormRow = styled.div`
 
-&:not(:last-child) {
-  border-bottom: 1px solid var(--color-grey-100);
-}
-
 &:has(button) {
   flex-direction: row;
   justify-content: flex-end;

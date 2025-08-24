@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, Controller } from "react-hook-form";
 import styled from 'styled-components';
 import { FiCalendar, FiUsers, FiDollarSign, FiHome, FiUser, FiCoffee, FiCreditCard, FiFileText, FiClock } from 'react-icons/fi';
@@ -95,11 +95,13 @@ export default function CreateBookingForm() {
     const { data: settings, isPending: isLoadingSettings } = useSettings();
 
     const watchedValues = watch(['startDate', 'endDate', 'cabinId', 'numGuests', 'hasBreakfast']);
-    const selectedCabin = cabins?.find(cabin => cabin._id === watchedValues.cabinId);
+    // const selectedCabin = cabins?.find(cabin => cabin._id === watchedValues.cabinId);
+    const [selectedCabin, setSelectedCabin] = useState(null);
 
     useEffect(() => {
         const [startDate, endDate, cabinId, numGuests, hasBreakfast] = watchedValues;
-
+        const cabin = cabins?.find(cabin => cabin._id === cabinId);
+        setSelectedCabin(cabin || null);
         if (startDate && endDate && cabinId) {
             const start = new Date(startDate);
             const end = new Date(endDate);
@@ -132,6 +134,7 @@ export default function CreateBookingForm() {
         console.log(newBooking);
         createBooking(newBooking);
     }
+    const today = new Date().toISOString().split("T")[0];
 
     if (isLoadingCabins || isLoadingGuests || isLoadingSettings) return <Spinner />
     return (
@@ -140,6 +143,8 @@ export default function CreateBookingForm() {
                 <FormRowVertical label="Start Date" error={errors.startDate?.message} icon={FiCalendar}>
                     <Input
                         type="date"
+                        min={today}
+                        max={watch("endDate") || ""}
                         {...register("startDate", {
                             required: "Start date is required"
                         })}
@@ -150,6 +155,7 @@ export default function CreateBookingForm() {
                 <FormRowVertical label="End Date" error={errors.endDate?.message} icon={FiCalendar}>
                     <Input
                         type="date"
+                        min={watch("startDate") || today}
                         {...register("endDate", {
                             required: "End date is required"
                         })}
@@ -181,17 +187,19 @@ export default function CreateBookingForm() {
                         name="guestId"
                         control={control}
                         rules={{ required: "Please select a guest" }}
-                        render={({ field: { onChange, value } }) => (
-                            <SearchDropdown
-                                options={guests}
-                                value={value}
-                                onChange={onChange}
-                                placeholder="Choose a guest..."
-                                searchKey="fullName"
-                                displayKey="fullName"
-                                error={errors.guestId}
-                            />
-                        )}
+                        render={({ field: { onChange, value } }) => {
+                            return (
+                                <SearchDropdown
+                                    options={guests}
+                                    value={value}
+                                    onChange={onChange}
+                                    placeholder="Choose a guest..."
+                                    searchKey="fullName"
+                                    displayKey="fullName"
+                                    error={errors.guestId}
+                                />
+                            )
+                        }}
                     />
                 </FormRowVertical>
 
@@ -199,7 +207,7 @@ export default function CreateBookingForm() {
                     <Input
                         type="number"
                         min="1"
-                        max={selectedCabin?.maxCapacity || 10}
+                        max={selectedCabin?.maxCapacity}
                         {...register("numGuests", {
                             required: "Number of guests is required",
                             min: { value: 1, message: "At least 1 guest required" },

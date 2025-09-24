@@ -9,11 +9,11 @@ const StyledFormRow = styled.div`
   border-bottom: none;
   padding-bottom: 0;
 }
+width: 100%;
 display: flex;
 flex-direction: column;
 gap: 0.8rem;
 grid-column: ${props => props.$fullWidth ? '1 / -1' : 'auto'};
-
 `;
 
 const Label = styled.label`
@@ -23,29 +23,32 @@ const Label = styled.label`
   display: flex;
   align-items: center;
   gap: 0.8rem;
-
-  @media (max-width: 600px) {
-    font-size: 1rem;
-    & svg {
-      width: 1.4rem;
-      height: 1.4rem;
-    }
-  }
 `;
 const Error = styled.span`
   font-size: 1.2rem;
   color: var(--color-red-700);
+`;
 
-  @media (max-width: 600px) {
-    font-size: 1rem;
-  }
+const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background-color: var(--color-brand-600);
+  color: var(--color-grey-50);
 `;
 
 export default function FormRowVertical({ label, error, children, icon: Icon, fullWidth }) {
   return (
     <StyledFormRow $fullWidth={fullWidth}>
       {label && <Label>
-        {Icon && <Icon size={16} />}
+        {Icon && 
+        <IconWrapper>
+        <Icon size={16} />
+        </IconWrapper>
+        }
         {label}
       </Label>
       }

@@ -21,17 +21,19 @@ const StyledForm = styled.form`
   border-radius: var(--border-radius-md, 8px);
   box-shadow: none;
   transform: none;
-
+  position: relative;
+  width: 100%;
 `;
 
 const FormGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2.4rem;
-
+  width: 100%;
+  position: relative;
   @media (max-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
   }
 `;
 
@@ -47,10 +49,7 @@ const CheckboxContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 1.2rem;
-
-  @media screen and (max-width: 600px) {
-    gap: 0.8rem;
-  }
+  margin-left: 0.5rem;
 `;
 
 const Checkbox = styled.input`
@@ -66,10 +65,6 @@ const CheckboxLabel = styled.label`
   display: flex;
   align-items: center;
   gap: 0.8rem;
-
-  @media screen and (max-width: 600px) {
-    font-size: 1rem;
-  }
 `;
 
 export default function CreateBookingForm() {

@@ -9,7 +9,8 @@ const DropdownContainer = styled.div`
 
 const DropdownButton = styled.button`
   width: 100%;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+  height: 56px;
   padding: 1.2rem 1.6rem;
   border: 1px solid var(--color-grey-300, #d1d5db);
   border-radius: var(--border-radius-sm, 4px);

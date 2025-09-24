@@ -3,8 +3,9 @@ import styled from "styled-components";
 const Input = styled.input`
 appearance: none;
 -webkit-appearance: none;
-    font-size: 1.4rem;
-  padding: 1.2rem 1.6rem;
+    font-size: 1.6rem;
+    height: 56px;
+  padding: 1rem 1.6rem;
   border: 1px solid var(--color-grey-300);
   border-radius: var(--border-radius-sm, 4px);
   background-color: var(--color-grey-0);
@@ -26,9 +27,7 @@ appearance: none;
   }
   @media screen and (max-width: 600px) {
     width: 100%;
-    padding: 1rem;
-    font-size: 1.2rem;
-    
+    padding: 0.8rem 1rem;
   }
 `;
 export default Input;

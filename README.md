@@ -1,12 +1,111 @@
-# React + Vite
+<p align="center">
+  <img src="public/logo-dark.png" alt="The Wild Oasis Logo" width="200">
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h1 align="center">The Wild Oasis</h1>
 
-Currently, two official plugins are available:
+<p align="center">
+  A modern hotel management system built with React and powered by a RESTful API
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 Features
 
-## Expanding the ESLint configuration
+- **Authentication & User Management**
+  - Secure login and registration system
+  - Role-based access control
+  - User profile management
+  - Password update functionality
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Cabin Management**
+  - Add, edit, and delete cabin listings
+  - Upload and manage cabin images
+  - Set pricing and availability
+  - Cabin filtering and sorting options
+
+- **Booking System**
+  - Create and manage bookings
+  - Check-in/check-out functionality
+  - Booking status tracking
+  - Guest information management
+
+- **Dashboard & Analytics**
+  - Real-time statistics and charts
+  - Occupancy rates tracking
+  - Revenue analysis
+  - Stay duration insights
+
+- **Settings & Configuration**
+  - Customizable hotel settings
+  - Breakfast pricing
+  - Booking rules configuration
+  - System preferences
+
+## 🚀 Technologies
+
+- **Frontend**
+  - React 19
+  - React Query v5
+  - React Router v6
+  - Styled Components
+  - React Hook Form
+  - Recharts
+  - Date-fns
+
+- **Development**
+  - Vite
+  - ESLint
+  - Prettier
+
+## 🛠️ Installation
+
+1. Clone the repository
+```bash
+git clone https://github.com/EsmailKhaleel/hotel-dashboard-react.git
+```
+
+2. Navigate to the project directory
+```bash
+cd wild-oasis
+```
+
+3. Install dependencies
+```bash
+npm install
+```
+
+4. Start the development server
+```bash
+npm run dev
+```
+
+## 🎯 Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+```env
+VITE_API_URL=your_api_url_here
+```
+
+## 📱 Responsive Design
+
+The application is fully responsive and optimized for:
+- Desktop devices
+- Tablets
+- Mobile phones
+
+## 🔒 Security
+
+- JWT-based authentication
+- Protected API routes
+- Secure password handling
+- HTTP-only cookies
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👥 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+---
+
